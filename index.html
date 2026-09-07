@@ -194,6 +194,11 @@
         user-select: none;
       }
 
+      .brand-title-wrap {
+        display: inline-flex;
+        align-items: center;
+      }
+
       /* The Light Beside Yong Ming Ngoh (Theme-Adaptive) */
       .brand-dot {
         display: inline-block;
@@ -489,18 +494,51 @@
         opacity: 1;
       }
 
+      /* MOBILE RESPONSIVENESS */
       @media (max-width: 860px) {
         .custom-cursor, .cursor-follower { display: none !important; }
         body, html { cursor: auto !important; }
         .glass-nav {
-          top: 12px !important; height: auto !important; padding: 12px 18px !important;
-          flex-direction: column !important; gap: 10px !important; border-radius: 26px !important;
+          top: 12px !important; 
+          height: auto !important; 
+          padding: 12px 18px !important;
+          flex-direction: column !important; 
+          gap: 10px !important; 
+          border-radius: 26px !important;
         }
+
+        /* Stack title on mobile: line 1 = Yong Ming Ngoh, line 2 = 3D Warehouse QR Generator */
         .nav-brand {
-          width: 100% !important; justify-content: center !important; padding-bottom: 8px !important;
+          width: 100% !important; 
+          flex-direction: column !important;
+          justify-content: center !important; 
+          align-items: center !important;
+          text-align: center !important;
+          padding-bottom: 8px !important;
           border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+          gap: 4px !important;
+        }
+        .brand-title-wrap {
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+        }
+        .nav-brand .divider {
+          display: none !important; /* Hide slash on mobile */
+        }
+        .nav-brand strong {
+          font-size: 0.95rem !important;
+        }
+        .nav-brand .subtitle {
+          font-size: 0.82rem !important;
+          opacity: 0.88 !important;
+          display: block !important;
+          text-align: center !important;
         }
         .nav-links { width: 100% !important; justify-content: center !important; gap: 14px !important; }
+        .tap-badge {
+          bottom: 155px !important;
+        }
       }
     </style>
   </head>
@@ -517,8 +555,12 @@
 
     <nav class="glass-nav tilt-3d">
       <div class="nav-brand">
-        <span class="brand-dot"></span>
-        <strong>Yong Ming Ngoh</strong> <span class="divider">/</span> <span class="subtitle">3D Warehouse QR Generator</span>
+        <span class="brand-title-wrap">
+          <span class="brand-dot"></span>
+          <strong>Yong Ming Ngoh</strong>
+        </span>
+        <span class="divider">/</span>
+        <span class="subtitle">3D Warehouse QR Generator</span>
       </div>
       <div class="nav-links">
         <button id="nav-scan-toggle" class="scan-pill">
@@ -640,7 +682,7 @@
           blob2:  'radial-gradient(circle, rgba(245, 158, 11, 0.52) 0%, rgba(252, 211, 77, 0.30) 50%, transparent 75%)',
           blob3:  'radial-gradient(circle, rgba(225, 29, 72, 0.35) 0%, rgba(251, 113, 133, 0.18) 45%, transparent 70%)',
           vignette: 'radial-gradient(ellipse at 50% 45%, rgba(67, 20, 7, 0.42) 0%, rgba(154, 52, 18, 0.20) 42%, rgba(254, 240, 138, 0.65) 75%, #fde047 100%)',
-          dustColor: 0xb45309,
+          dustColor: 0xEA580C,
 
           sunColor: '#fff1dc',
           sunIntensity: 2.4,
@@ -693,7 +735,7 @@
           blob2:  'radial-gradient(circle, rgba(14, 165, 233, 0.50) 0%, rgba(125, 211, 252, 0.28) 50%, transparent 75%)',
           blob3:  'radial-gradient(circle, rgba(99, 102, 241, 0.38) 0%, rgba(165, 180, 252, 0.20) 45%, transparent 70%)',
           vignette: 'radial-gradient(ellipse at 50% 45%, rgba(8, 47, 73, 0.45) 0%, rgba(3, 105, 161, 0.18) 42%, rgba(186, 230, 253, 0.65) 75%, #7dd3fc 100%)',
-          dustColor: 0x0284c7,
+          dustColor: 0x38BDF8,
 
           sunColor: '#e0f2fe',
           sunIntensity: 2.2,
@@ -746,7 +788,7 @@
           blob2:  'radial-gradient(circle, rgba(245, 158, 11, 0.40) 0%, rgba(217, 119, 6, 0.18) 50%, transparent 75%)',
           blob3:  'radial-gradient(circle, rgba(37, 99, 235, 0.35) 0%, rgba(30, 58, 138, 0.16) 45%, transparent 70%)',
           vignette: 'radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(2, 6, 23, 0.65) 80%, #020617 100%)',
-          dustColor: 0x6ee7b7,
+          dustColor: 0x34D399,
 
           sunColor: '#e2e8f0', 
           sunIntensity: 2.8,   
@@ -812,6 +854,10 @@
         document.getElementById('blob-2').style.background = t.blob2;
         document.getElementById('blob-3').style.background = t.blob3;
         document.getElementById('bg-vignette').style.background = t.vignette;
+
+        if (dustMat) {
+          dustMat.color.setHex(t.dustColor);
+        }
       }
       updateThemeAccents(activeMode);
 
@@ -928,7 +974,7 @@
       }
 
       // ==========================================
-      // 3. THREE.JS SCENE SETUP
+      // 3. THREE.JS SCENE SETUP & RESPONSIVE VIEW ENGINE
       // ==========================================
       const container = document.getElementById('webgl-container');
       const scene = new THREE.Scene();
@@ -936,13 +982,27 @@
       let width = window.innerWidth;
       let height = window.innerHeight;
 
-      const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 1000);
+      // Centered look-at positions
       const isoPos = new THREE.Vector3(48.0, 46.0, 48.0);
-      const isoTarget = new THREE.Vector3(0.0, -3.8, 0.0);
+      const isoTarget = new THREE.Vector3(0.0, 0.0, 0.0);
 
-      const flatPos = new THREE.Vector3(0.0, 380.0, 2.501);
-      const flatTarget = new THREE.Vector3(0.0, 0.0, 2.5);
+      const flatPos = new THREE.Vector3(0.0, 380.0, 0.001);
+      const flatTarget = new THREE.Vector3(0.0, 0.0, 0.0);
 
+      // Adaptive FOV functions to guarantee exact centering and fit on mobile
+      function get3DFov() {
+        const aspect = window.innerWidth / window.innerHeight;
+        if (aspect >= 1.0) return 38.0;
+        return Math.min(74.0, Math.max(38.0, 2 * Math.atan(0.34 / aspect) * (180 / Math.PI)));
+      }
+
+      function getFlatFov() {
+        const aspect = window.innerWidth / window.innerHeight;
+        if (aspect >= 1.0) return 9.0;
+        return Math.max(9.0, 2 * Math.atan(46 / (760 * aspect)) * (180 / Math.PI));
+      }
+
+      const camera = new THREE.PerspectiveCamera(get3DFov(), width / height, 0.1, 1000);
       camera.position.copy(isoPos);
       camera.lookAt(isoTarget);
 
@@ -995,37 +1055,37 @@
       fillLight.position.set(-30, 20, -30);
       scene.add(fillLight);
 
-      // Dust Particles
+      // Distinct, Clearly Visible Dust Particles
       function createSoftParticleTexture() {
         const canvas = document.createElement('canvas');
         canvas.width = 64;
         canvas.height = 64;
         const ctx = canvas.getContext('2d');
         const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-        grad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
-        grad.addColorStop(0.35, 'rgba(255, 255, 255, 0.50)');
-        grad.addColorStop(0.7, 'rgba(255, 255, 255, 0.10)');
+        grad.addColorStop(0, 'rgba(255, 255, 255, 1.0)');
+        grad.addColorStop(0.4, 'rgba(255, 255, 255, 0.85)');
+        grad.addColorStop(0.8, 'rgba(255, 255, 255, 0.25)');
         grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, 64, 64);
         return new THREE.CanvasTexture(canvas);
       }
 
-      const dustCount = 130;
+      const dustCount = 160;
       const dustGeo = new THREE.BufferGeometry();
       const dustPositions = new Float32Array(dustCount * 3);
       for (let i = 0; i < dustCount * 3; i += 3) {
-        dustPositions[i] = (Math.random() - 0.5) * 48;
-        dustPositions[i + 1] = Math.random() * 18;
-        dustPositions[i + 2] = (Math.random() - 0.5) * 48;
+        dustPositions[i] = (Math.random() - 0.5) * 55;
+        dustPositions[i + 1] = 0.5 + Math.random() * 22;
+        dustPositions[i + 2] = (Math.random() - 0.5) * 55;
       }
       dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
       const dustMat = new THREE.PointsMaterial({
-        size: 0.48,
+        size: 1.8, // Clearly visible floating motes
         map: createSoftParticleTexture(),
         color: PALETTE.dustColor,
         transparent: true,
-        opacity: 0.28,
+        opacity: 0.85,
         blending: THREE.AdditiveBlending,
         depthWrite: false
       });
@@ -1347,7 +1407,7 @@
       }
 
       // ==========================================
-      // 5. VIEW TOGGLE (AUTO-HIDDEN HINT BADGE)
+      // 5. VIEW TOGGLE (AUTO-HIDDEN HINT BADGE & RESPONSIVE CENTERING)
       // ==========================================
       const tapBadge = document.getElementById('tap-badge');
       const badgeText = document.getElementById('badge-text');
@@ -1370,6 +1430,7 @@
 
         const destPos = isFlat ? flatPos : isoPos;
         const destTarget = isFlat ? flatTarget : isoTarget;
+        const targetFov = isFlat ? getFlatFov() : get3DFov();
 
         controls.enabled = false;
         playServoHum();
@@ -1383,7 +1444,7 @@
         });
 
         gsap.to(camera, {
-          fov: isFlat ? 9.0 : 38.0,
+          fov: targetFov,
           duration: 1.2,
           ease: "power3.inOut",
           onUpdate: () => camera.updateProjectionMatrix()
@@ -1561,6 +1622,7 @@
         width = window.innerWidth;
         height = window.innerHeight;
         camera.aspect = width / height;
+        camera.fov = isFlat ? getFlatFov() : get3DFov();
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
       });
@@ -1583,10 +1645,10 @@
         if (dustParticles) {
           const positions = dustGeo.attributes.position.array;
           for (let i = 0; i < dustPositions.length; i += 3) {
-            positions[i + 1] -= 0.015;
-            positions[i] += Math.sin(elapsedTime * 0.4 + i) * 0.008;
+            positions[i + 1] -= 0.018;
+            positions[i] += Math.sin(elapsedTime * 0.4 + i) * 0.01;
             if (positions[i + 1] < 0) {
-              positions[i + 1] = 18;
+              positions[i + 1] = 22;
             }
           }
           dustGeo.attributes.position.needsUpdate = true;
