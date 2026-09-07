@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Warehouse QR Generator</title>
 
+    <!-- Professional Vector QR Code Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='2' width='7' height='7' rx='1'/><rect x='15' y='2' width='7' height='7' rx='1'/><rect x='2' y='15' width='7' height='7' rx='1'/><path d='M15 15h3v3h-3z'/><path d='M19 19h3v3h-3z'/><path d='M11 6h2'/><path d='M11 12h2'/><path d='M6 11v2'/><path d='M12 18h2'/><path d='M18 11h2'/></svg>" />
 
+    <!-- Google Fonts & Phosphor Icons CDN -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+    <!-- Three.js & Animation CDNs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -548,9 +551,11 @@
     </style>
   </head>
   <body>
+    <!-- VisionOS Custom Cursor -->
     <div class="custom-cursor"></div>
     <div class="cursor-follower"></div>
 
+    <!-- Restored Original Fluid Pastel Horizon Mesh -->
     <div id="abstract-bg">
       <div id="blob-1" class="glow-blob blob-1"></div>
       <div id="blob-2" class="glow-blob blob-2"></div>
@@ -558,6 +563,7 @@
       <div id="bg-vignette" class="bg-vignette"></div>
     </div>
 
+    <!-- Liquid Glass Navbar with 3D Tilt Hover Physics -->
     <nav class="glass-nav tilt-3d">
       <div class="nav-brand">
         <span class="brand-title-wrap">
@@ -580,12 +586,15 @@
 
     <div id="toast" class="toast">Snapshot saved & link copied!</div>
 
+    <!-- Floating Hint Badge (Auto-hides in scan mode) -->
     <div id="tap-badge" class="tap-badge tilt-3d">
       <span class="pulse-dot"></span>
       <span id="badge-text">Tap for QR, tap again for 3D</span>
     </div>
 
+    <!-- Bottom Liquid Glass Control Stack with 3D Tilt Physics -->
     <div class="bottom-control-panel">
+      <!-- Input & Action Bar -->
       <div class="bottom-bar tilt-3d">
         <input id="qr-input" class="bottom-input" type="text" value="https://yongming.vorky.fyi/" placeholder="Type any link or text..." />
         <button id="submit-btn" class="action-btn" title="Update Facility">
@@ -603,6 +612,7 @@
         </button>
       </div>
 
+      <!-- Mode Switcher Row + Audio Button -->
       <div class="mode-row">
         <div class="mode-selector tilt-3d">
           <button class="mode-tab active" data-mode="day">☀️ Day Shift</button>
@@ -862,7 +872,7 @@
 
         if (dustMat) {
           dustMat.color.setHex(t.dustColor);
-          dustMat.size = 1.6; // Large, obvious floating particles
+          dustMat.size = 1.6;
           dustMat.opacity = 0.65;
         }
       }
@@ -1048,7 +1058,7 @@
       fillLight.position.set(-30, 20, -30);
       scene.add(fillLight);
 
-      // Dust Particles
+      // Dust Particles (Enhanced size: 1.6 and opacity: 0.65 for obvious visibility)
       function createSoftParticleTexture() {
         const canvas = document.createElement('canvas');
         canvas.width = 64;
