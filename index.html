@@ -580,7 +580,7 @@
 
     <div id="toast" class="toast">Snapshot saved & link copied!</div>
 
-    <div id="tap-badge" class="tap-badge">
+    <div id="tap-badge" class="tap-badge tilt-3d">
       <span class="pulse-dot"></span>
       <span id="badge-text">Tap for QR, tap again for 3D</span>
     </div>
@@ -859,6 +859,12 @@
         document.getElementById('blob-2').style.background = t.blob2;
         document.getElementById('blob-3').style.background = t.blob3;
         document.getElementById('bg-vignette').style.background = t.vignette;
+
+        if (dustMat) {
+          dustMat.color.setHex(t.dustColor);
+          dustMat.size = 1.6; // Large, obvious floating particles
+          dustMat.opacity = 0.65;
+        }
       }
       updateThemeAccents(activeMode);
 
@@ -1068,11 +1074,11 @@
       }
       dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
       const dustMat = new THREE.PointsMaterial({
-        size: 0.48,
+        size: 1.6,
         map: createSoftParticleTexture(),
         color: PALETTE.dustColor,
         transparent: true,
-        opacity: 0.28,
+        opacity: 0.65,
         blending: THREE.AdditiveBlending,
         depthWrite: false
       });
