@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Warehouse QR Generator</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='2' width='7' height='7' rx='1'/><rect x='15' y='2' width='7' height='7' rx='1'/><rect x='2' y='15' width='7' height='7' rx='1'/><path d='M15 15h3v3h-3z'/><path d='M19 19h3v3h-3z'/><path d='M11 6h2'/><path d='M11 12h2'/><path d='M6 11v2'/><path d='M12 18h2'/><path d='M18 11h2'/></svg>" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF5500' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='2' width='7' height='7' rx='1'/><rect x='15' y='2' width='7' height='7' rx='1'/><rect x='2' y='15' width='7' height='7' rx='1'/><path d='M15 15h3v3h-3z'/><path d='M19 19h3v3h-3z'/><path d='M11 6h2'/><path d='M11 12h2'/><path d='M6 11v2'/><path d='M12 18h2'/><path d='M18 11h2'/></svg>" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -199,17 +199,16 @@
         align-items: center;
       }
 
-      /* The Light Beside Yong Ming Ngoh (Theme-Adaptive) */
+      /* Pastel Grey Brand Dot */
       .brand-dot {
         display: inline-block;
         width: 7px;
         height: 7px;
         margin-right: 9px;
-        background-color: var(--theme-accent);
+        background-color: #94A3B8;
         border-radius: 50%;
-        box-shadow: 0 0 8px var(--theme-accent), 0 0 16px var(--theme-accent-glow);
+        box-shadow: 0 0 6px rgba(148, 163, 184, 0.5);
         flex-shrink: 0;
-        transition: background-color 0.4s ease, box-shadow 0.4s ease;
       }
 
       .nav-brand strong { font-weight: 600; color: #FFFFFF; }
@@ -247,7 +246,7 @@
         transform: translateY(-1px);
       }
 
-      /* Translucent Semi-Glass Scan View Button */
+      /* Translucent Semi-Scan Button */
       .scan-pill {
         padding: 7px 18px;
         border-radius: 9999px;
@@ -260,14 +259,6 @@
         box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
         letter-spacing: 0.02em;
       }
-
-      /* QR Icon Beside 3D Model / Scan View (Theme-Adaptive) */
-      .scan-pill i {
-        color: var(--theme-accent) !important;
-        filter: drop-shadow(0 0 6px var(--theme-accent-glow));
-        transition: color 0.4s ease, filter 0.4s ease;
-      }
-
       .scan-pill:hover {
         background: rgba(255, 255, 255, 0.24) !important;
         border-color: rgba(255, 255, 255, 0.6) !important;
@@ -524,7 +515,7 @@
           justify-content: center !important;
         }
         .nav-brand .divider {
-          display: none !important; /* Hide slash on mobile */
+          display: none !important;
         }
         .nav-brand strong {
           font-size: 0.95rem !important;
@@ -682,7 +673,7 @@
           blob2:  'radial-gradient(circle, rgba(245, 158, 11, 0.52) 0%, rgba(252, 211, 77, 0.30) 50%, transparent 75%)',
           blob3:  'radial-gradient(circle, rgba(225, 29, 72, 0.35) 0%, rgba(251, 113, 133, 0.18) 45%, transparent 70%)',
           vignette: 'radial-gradient(ellipse at 50% 45%, rgba(67, 20, 7, 0.42) 0%, rgba(154, 52, 18, 0.20) 42%, rgba(254, 240, 138, 0.65) 75%, #fde047 100%)',
-          dustColor: 0xEA580C,
+          dustColor: 0xd97706,
 
           sunColor: '#fff1dc',
           sunIntensity: 2.4,
@@ -735,7 +726,7 @@
           blob2:  'radial-gradient(circle, rgba(14, 165, 233, 0.50) 0%, rgba(125, 211, 252, 0.28) 50%, transparent 75%)',
           blob3:  'radial-gradient(circle, rgba(99, 102, 241, 0.38) 0%, rgba(165, 180, 252, 0.20) 45%, transparent 70%)',
           vignette: 'radial-gradient(ellipse at 50% 45%, rgba(8, 47, 73, 0.45) 0%, rgba(3, 105, 161, 0.18) 42%, rgba(186, 230, 253, 0.65) 75%, #7dd3fc 100%)',
-          dustColor: 0x38BDF8,
+          dustColor: 0x0ea5e9,
 
           sunColor: '#e0f2fe',
           sunIntensity: 2.2,
@@ -788,7 +779,7 @@
           blob2:  'radial-gradient(circle, rgba(245, 158, 11, 0.40) 0%, rgba(217, 119, 6, 0.18) 50%, transparent 75%)',
           blob3:  'radial-gradient(circle, rgba(37, 99, 235, 0.35) 0%, rgba(30, 58, 138, 0.16) 45%, transparent 70%)',
           vignette: 'radial-gradient(ellipse at 50% 45%, transparent 35%, rgba(2, 6, 23, 0.65) 80%, #020617 100%)',
-          dustColor: 0x34D399,
+          dustColor: 0x10b981,
 
           sunColor: '#e2e8f0', 
           sunIntensity: 2.8,   
@@ -854,10 +845,6 @@
         document.getElementById('blob-2').style.background = t.blob2;
         document.getElementById('blob-3').style.background = t.blob3;
         document.getElementById('bg-vignette').style.background = t.vignette;
-
-        if (dustMat) {
-          dustMat.color.setHex(t.dustColor);
-        }
       }
       updateThemeAccents(activeMode);
 
@@ -982,14 +969,13 @@
       let width = window.innerWidth;
       let height = window.innerHeight;
 
-      // Centered look-at positions
+      // Centered targets
       const isoPos = new THREE.Vector3(48.0, 46.0, 48.0);
       const isoTarget = new THREE.Vector3(0.0, 0.0, 0.0);
 
       const flatPos = new THREE.Vector3(0.0, 380.0, 0.001);
       const flatTarget = new THREE.Vector3(0.0, 0.0, 0.0);
 
-      // Adaptive FOV functions to guarantee exact centering and fit on mobile
       function get3DFov() {
         const aspect = window.innerWidth / window.innerHeight;
         if (aspect >= 1.0) return 38.0;
@@ -1055,7 +1041,7 @@
       fillLight.position.set(-30, 20, -30);
       scene.add(fillLight);
 
-      // Distinct, Clearly Visible Dust Particles
+      // Obvious, vivid floating dust particles
       function createSoftParticleTexture() {
         const canvas = document.createElement('canvas');
         canvas.width = 64;
@@ -1081,11 +1067,11 @@
       }
       dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
       const dustMat = new THREE.PointsMaterial({
-        size: 1.8, // Clearly visible floating motes
+        size: 1.6, // Clearly obvious floating motes
         map: createSoftParticleTexture(),
         color: PALETTE.dustColor,
         transparent: true,
-        opacity: 0.85,
+        opacity: 0.80,
         blending: THREE.AdditiveBlending,
         depthWrite: false
       });
@@ -1317,7 +1303,7 @@
         const highBayRadius = size * 0.18;
         const rackRadius = size * 0.37;
 
-        instancedMesh = new THREE.InstancedMesh(boxGeo, unitMaterial, 28000);
+        instancedMesh = new THREE.InstancedMesh(boxGeo, unitMaterial, 55000);
         instancedMesh.castShadow = true;
         instancedMesh.receiveShadow = true;
         currentInstance = 0;
@@ -1407,7 +1393,7 @@
       }
 
       // ==========================================
-      // 5. VIEW TOGGLE (AUTO-HIDDEN HINT BADGE & RESPONSIVE CENTERING)
+      // 5. VIEW TOGGLE (AUTO-HIDDEN HINT BADGE)
       // ==========================================
       const tapBadge = document.getElementById('tap-badge');
       const badgeText = document.getElementById('badge-text');
@@ -1645,10 +1631,10 @@
         if (dustParticles) {
           const positions = dustGeo.attributes.position.array;
           for (let i = 0; i < dustPositions.length; i += 3) {
-            positions[i + 1] -= 0.018;
-            positions[i] += Math.sin(elapsedTime * 0.4 + i) * 0.01;
+            positions[i + 1] -= 0.015;
+            positions[i] += Math.sin(elapsedTime * 0.4 + i) * 0.008;
             if (positions[i + 1] < 0) {
-              positions[i + 1] = 22;
+              positions[i + 1] = 18;
             }
           }
           dustGeo.attributes.position.needsUpdate = true;
