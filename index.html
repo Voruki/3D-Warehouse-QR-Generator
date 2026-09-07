@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Warehouse QR Generator</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF5500' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='2' width='7' height='7' rx='1'/><rect x='15' y='2' width='7' height='7' rx='1'/><rect x='2' y='15' width='7' height='7' rx='1'/><path d='M15 15h3v3h-3z'/><path d='M19 19h3v3h-3z'/><path d='M11 6h2'/><path d='M11 12h2'/><path d='M6 11v2'/><path d='M12 18h2'/><path d='M18 11h2'/></svg>" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='2' width='7' height='7' rx='1'/><rect x='15' y='2' width='7' height='7' rx='1'/><rect x='2' y='15' width='7' height='7' rx='1'/><path d='M15 15h3v3h-3z'/><path d='M19 19h3v3h-3z'/><path d='M11 6h2'/><path d='M11 12h2'/><path d='M6 11v2'/><path d='M12 18h2'/><path d='M18 11h2'/></svg>" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -194,16 +194,17 @@
         user-select: none;
       }
 
-      /* Pastel Grey Brand Dot */
+      /* The Light Beside Yong Ming Ngoh (Theme-Adaptive) */
       .brand-dot {
         display: inline-block;
         width: 7px;
         height: 7px;
         margin-right: 9px;
-        background-color: #94A3B8;
+        background-color: var(--theme-accent);
         border-radius: 50%;
-        box-shadow: 0 0 6px rgba(148, 163, 184, 0.5);
+        box-shadow: 0 0 8px var(--theme-accent), 0 0 16px var(--theme-accent-glow);
         flex-shrink: 0;
+        transition: background-color 0.4s ease, box-shadow 0.4s ease;
       }
 
       .nav-brand strong { font-weight: 600; color: #FFFFFF; }
@@ -241,7 +242,7 @@
         transform: translateY(-1px);
       }
 
-      /* Translucent Semi-Glass Scan View Button (Pastel Grey Icon) */
+      /* Translucent Semi-Glass Scan View Button */
       .scan-pill {
         padding: 7px 18px;
         border-radius: 9999px;
@@ -254,6 +255,14 @@
         box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
         letter-spacing: 0.02em;
       }
+
+      /* QR Icon Beside 3D Model / Scan View (Theme-Adaptive) */
+      .scan-pill i {
+        color: var(--theme-accent) !important;
+        filter: drop-shadow(0 0 6px var(--theme-accent-glow));
+        transition: color 0.4s ease, filter 0.4s ease;
+      }
+
       .scan-pill:hover {
         background: rgba(255, 255, 255, 0.24) !important;
         border-color: rgba(255, 255, 255, 0.6) !important;
@@ -513,18 +522,7 @@
       </div>
       <div class="nav-links">
         <button id="nav-scan-toggle" class="scan-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 4px;">
-            <rect x="2" y="2" width="7" height="7" rx="1"/>
-            <rect x="15" y="2" width="7" height="7" rx="1"/>
-            <rect x="2" y="15" width="7" height="7" rx="1"/>
-            <path d="M15 15h3v3h-3z"/>
-            <path d="M19 19h3v3h-3z"/>
-            <path d="M11 6h2"/>
-            <path d="M11 12h2"/>
-            <path d="M6 11v2"/>
-            <path d="M12 18h2"/>
-            <path d="M18 11h2"/>
-          </svg>
+          <i class="ph ph-qr-code" style="font-size: 16px;"></i>
           <span id="nav-btn-text">Scan View</span>
         </button>
         <a href="https://yongming.vorky.fyi/" target="_blank">
@@ -1259,7 +1257,7 @@
         const highBayRadius = size * 0.18;
         const rackRadius = size * 0.37;
 
-        instancedMesh = new THREE.InstancedMesh(boxGeo, unitMaterial, 55000);
+        instancedMesh = new THREE.InstancedMesh(boxGeo, unitMaterial, 28000);
         instancedMesh.castShadow = true;
         instancedMesh.receiveShadow = true;
         currentInstance = 0;
